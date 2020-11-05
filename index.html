@@ -4,26 +4,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./assets/css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <title>Document</title>
+    <title>LookUp</title>
 
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 
 <body>
-    <header>
+    <nav class="deep-purple lighten-2">
+        <div class="nav-wrapper">
+            <a href="#" class="brand-logo">LookUp</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="https://images.nasa.gov/" target="_blank">NASA Image and Video Library</a></li>
+                <li><a href="https://images.nasa.gov/search-results?q=sun&page=1&media=image,video,audio&yearStart=1920&yearEnd=2020"
+                        target="_blank">Sun</a>
+                </li>
+                <li><a href="https://images.nasa.gov/search-results?q=moon&page=1&media=image,video,audio&yearStart=1920&yearEnd=2020"
+                        target="_blank">Moon</a>
+                </li>
 
-    </header>
+                <li><a href="https://images.nasa.gov/search-results?q=planets&page=1&media=image,video,audio&yearStart=1920&yearEnd=2020"
+                        target="_blank">Planets</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
     <main>
+        <div class="container">
+            <div class="row">
+                <!-- Left panel  -->
+                <div class="col s12 m4 l4">
+                    <div class="row  light-blue darken-4">
+                        <span class="white-text">Div for location and date form fields</span>
+                    </div>
+                    <div class="row  light-blue darken-4">
+                        <span class="white-text">Div for search history
+                        </span>
+                    </div>
+                </div>
 
+                <!-- Right panel  -->
+                <div class="col s12 m8 l8">
+                    <div>Div for Search Result Display
+                        <img class="materialboxed" width="650" src="./assets/images/PIA08942_orig.jpg">
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
-    <footer>
-
+    <footer class="page-footer deep-purple lighten-2">
+        <div class="row">
+            <h5 class="white-text">Chuck Norris Quote?</h5>
+            <p class="grey-text text-lighten-4">"A lot of times people look at the negative side of what they
+                feel they can't do. I always look on the positive side of
+                what I can do." -Chuck Norris
+            </p>
+            <p> © 2020 BenKaraKristin, Inc.
+            </p>
+        </div>
     </footer>
 
+    <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"
         integrity="sha512-WNLxfP/8cVYL9sj8Jnp6et0BkubLP31jhTG9vhL/F5uEZmg5wEzKoXp1kJslzPQWwPT1eyMiSxlKCgzHLOTOTQ=="
         crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="./assets/js/script.js"></script>
 </body>
 
