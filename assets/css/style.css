@@ -18,7 +18,7 @@ div {
 
 
 /* materialize datepicker styling */
-.datepicker-date-display, .timepicker-time-display {
+.datepicker-date-display {
   background-color: rgb(118, 186, 241);
 }
 
@@ -33,4 +33,22 @@ div {
 .datepicker-table td.is-selected {
   background-color: rgb(118, 186, 241);
   color: #fff;
+}
+
+/* materialize timepicker styling */
+.timepicker-digital-display{
+  background-color: rgb(118, 186, 241);
+}
+
+.timepicker-close{
+  color: rgb(118, 186, 241);
+}
+
+.timepicker-canvas line {
+    stroke: #056ea3;
+}
+
+.timepicker-canvas-bg, 
+.timepicker-canvas-bearing {
+    fill: #056ea3;
 }
