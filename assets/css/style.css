@@ -1,17 +1,54 @@
-   body {
-    display: flex;
-    min-height: 100vh;
-    flex-direction: column;
-  }
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
 
-  main {
-    flex: 1 0 auto;
-  }
+main {
+  flex: 1 0 auto;
+}
 
-  footer {
-    padding: 8px;
-  }
+footer {
+  padding: 8px;
+}
   
-  div {
-    padding: 10px;
-  }
+div {
+  padding: 10px;
+}
+
+
+/* materialize datepicker styling */
+.datepicker-date-display {
+  background-color: rgb(118, 186, 241);
+}
+
+.datepicker-cancel, .datepicker-clear, .datepicker-today, .datepicker-done {
+  color:rgb(69, 143, 204);
+}
+
+.datepicker-table td.is-today {
+  color: rgb(69, 143, 204);
+}
+
+.datepicker-table td.is-selected {
+  background-color: rgb(118, 186, 241);
+  color: #fff;
+}
+
+/* materialize timepicker styling */
+.timepicker-digital-display{
+  background-color: rgb(118, 186, 241);
+}
+
+.timepicker-close{
+  color: rgb(118, 186, 241);
+}
+
+.timepicker-canvas line {
+    stroke: #056ea3;
+}
+
+.timepicker-canvas-bg, 
+.timepicker-canvas-bearing {
+    fill: #056ea3;
+}

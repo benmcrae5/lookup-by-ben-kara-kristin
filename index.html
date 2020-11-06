@@ -9,6 +9,8 @@
     <!-- CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" href="./assets/css/style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 </head>
 
 <body>
@@ -33,21 +35,46 @@
     <main>
         <div class="container">
             <div class="row">
+                <h5>
+                    We should probably have some kind of text for instructions.
+                </h5>
                 <!-- Left panel  -->
                 <div class="col s12 m4 l4">
-                    <div class="row  light-blue darken-4">
-                        <span class="white-text">Div for location and date form fields</span>
+                    <div class="row light-blue darken-4">
+                        <span class="white-text">Where will you be?</span>
+                        <div class="input-field">
+                            <input placeholder="City" id="city-name" type="text" class="validate white-text">
+                        </div>
                     </div>
-                    <div class="row  light-blue darken-4">
-                        <span class="white-text">Div for search history
-                        </span>
+
+                    <div class="row light-blue darken-4">
+                        <span class="white-text">On what day will you be there?</span>
+                        <div class="input-field">
+                            <input placeholder="Date" type="text" class="datepicker white-text">
+                        </div>
                     </div>
+
+                    <div class="row light-blue darken-4">
+                        <span class="white-text">At what time will you be there?</span>
+                        <div class="input-field">
+                            <input placeholder="Time" type="text" class="timepicker white-text">
+                        </div>
+                    </div>
+                    <div>
+                        <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </div>
+
                 </div>
 
                 <!-- Right panel  -->
                 <div class="col s12 m8 l8">
                     <div>Div for Search Result Display
                         <img class="materialboxed" width="650" src="./assets/images/PIA08942_orig.jpg">
+                    </div>
+                    <div class="row">
+                        (Div for search history)
                     </div>
                 </div>
             </div>
