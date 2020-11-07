@@ -18,3 +18,14 @@ $(document).ready(function () {
 $(document).ready(function () {
   $('.timepicker').timepicker();
 });
+
+// Submit Button function:
+let submitForm = function () {
+    let userLocation = $("#city-name").val();
+    let userViewDate = $("#view-date").val();
+    let userViewTime = $("#view-time").val();
+
+}
+
+// Click event listener for the Submit Button
+$("#submit-btn").on("click", submitForm);

@@ -39,7 +39,7 @@
                     We should probably have some kind of text for instructions.
                 </h5>
                 <!-- Left panel  -->
-                <div class="col s12 m4 l4">
+                <div class="col s12 m4 l4 input-form">
                     <div class="row light-blue darken-4">
                         <span class="white-text">Where will you be?</span>
                         <div class="input-field">
@@ -50,18 +50,18 @@
                     <div class="row light-blue darken-4">
                         <span class="white-text">On what day will you be there?</span>
                         <div class="input-field">
-                            <input placeholder="Date" type="text" class="datepicker white-text">
+                            <input placeholder="Date" id="view-date" type="text" class="datepicker white-text">
                         </div>
                     </div>
 
                     <div class="row light-blue darken-4">
                         <span class="white-text">At what time will you be there?</span>
                         <div class="input-field">
-                            <input placeholder="Time" type="text" class="timepicker white-text">
+                            <input placeholder="Time" id="view-time" type="text" class="timepicker white-text">
                         </div>
                     </div>
                     <div>
-                        <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+                        <button id="submit-btn" class="btn waves-effect waves-light" type="submit" name="action">Submit
                             <i class="material-icons right">send</i>
                         </button>
                     </div>
