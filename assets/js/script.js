@@ -37,18 +37,39 @@ let searchHistoryUpdate = function (viewLocation, viewDate, viewTime) {
         searchHistory.push(saveObject);
         localStorage.setItem("lookUpSearchHistory", JSON.stringify(searchHistory));
     }
-    
+
     // NEED a function to update visual search history and add that here
 }
 
+//validates input, displays missing parameters in red, changes correct ones back
+let validateInputs = function(viewLocation, viewDate, viewTime) {
+    if (!viewLocation) {
+        $(".location-title").removeClass("white-text").addClass("red-text");
+    } else {
+        $(".location-title").removeClass("red-text").addClass("white-text");
+    }
+    if (!viewDate) {
+        $(".date-title").removeClass("white-text").addClass("red-text");
+    } else {
+        $(".date-title").removeClass("red-text").addClass("white-text");
+    }
+    if (!viewTime) {
+        $(".time-title").removeClass("white-text").addClass("red-text");
+    } else {
+        $(".time-title").removeClass("red-text").addClass("white-text");
+    }
+}
 
 // Submit Button function:
 let submitForm = function () {
     let userLocation = $("#city-name").val();
     let userViewDate = $("#view-date").val();
     let userViewTime = $("#view-time").val();
-    searchHistoryUpdate(userLocation, userViewDate, userViewTime);
-
+    validateInputs(userLocation, userViewDate, userViewTime);
+    if (userLocation && userViewDate && userViewTime) {
+        searchHistoryUpdate(userLocation, userViewDate, userViewTime);
+        // function for API calls 
+    }
 }
 
 // Click event listener for the Submit Button
