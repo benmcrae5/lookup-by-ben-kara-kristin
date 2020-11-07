@@ -4,6 +4,7 @@
 
 let searchHistory = JSON.parse(localStorage.getItem("lookUpSearchHistory")) || [];
 
+
 var key = "bAkwC8fyPvowqus1b73c6wRxPBMW2e6F15AiO19h";
 
 // material box for the search result image
@@ -20,6 +21,20 @@ $(document).ready(function () {
 $(document).ready(function () {
   $('.timepicker').timepicker();
 });
+
+// function to add searches to search dropdown
+let populateDropDown = function() {
+    if (searchHistory[0]) {
+        for (let i = (searchHistory.length - 1); i >= 0 && i > (searchHistory.length - 10); i--) {
+            console.log(searchHistory[i])
+            let thisSearch = $("<option>")
+                .addClass("search-value")
+                .attr("value", "searchHistory[" + i + "]")
+                .text(searchHistory[i].location + "\n" + searchHistory[i].date  + "\n" + searchHistory[i].time)
+                .appendTo($("#search-history"));
+        }
+    }
+}
 
 // takes in location,date,time and updates the Search history on the page and in Local Storage
 let searchHistoryUpdate = function (viewLocation, viewDate, viewTime) {
@@ -39,6 +54,7 @@ let searchHistoryUpdate = function (viewLocation, viewDate, viewTime) {
     }
 
     // NEED a function to update visual search history and add that here
+    populateDropDown();
 }
 
 //validates input, displays missing parameters in red, changes correct ones back
@@ -60,6 +76,15 @@ let validateInputs = function(viewLocation, viewDate, viewTime) {
     }
 }
 
+// Populates search criteria with search history parameters
+let bringHistoryBack = function() {
+    let userInfoObject = $("#search-history").val();
+    console.log(userInfoObject);
+    let userLocation;
+    let userViewDate;
+    let userViewTime;
+}
+
 // Submit Button function:
 let submitForm = function () {
     let userLocation = $("#city-name").val();
@@ -72,5 +97,11 @@ let submitForm = function () {
     }
 }
 
+
+populateDropDown();
+
 // Click event listener for the Submit Button
 $("#submit-btn").on("click", submitForm);
+
+// Change event listener for activating the search history
+$(".history").change(bringHistoryBack);

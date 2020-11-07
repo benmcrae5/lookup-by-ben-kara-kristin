@@ -52,3 +52,7 @@ div {
 .timepicker-canvas-bearing {
     fill: #056ea3;
 }
+
+select {
+  display: flex;
+}
