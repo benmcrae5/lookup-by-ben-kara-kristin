@@ -28,8 +28,8 @@ let populateDropDown = function() {
         for (let i = (searchHistory.length - 1); i >= 0 && i > (searchHistory.length - 10); i--) {
             console.log(searchHistory[i])
             let thisSearch = $("<option>")
-                .addClass("search-value")
-                .attr("value", "searchHistory[" + i + "]")
+                .addClass("search-value searchHistory[" + i + "]")
+                .attr("value", i)
                 .text(searchHistory[i].location + "\n" + searchHistory[i].date  + "\n" + searchHistory[i].time)
                 .appendTo($("#search-history"));
         }
@@ -52,8 +52,7 @@ let searchHistoryUpdate = function (viewLocation, viewDate, viewTime) {
         searchHistory.push(saveObject);
         localStorage.setItem("lookUpSearchHistory", JSON.stringify(searchHistory));
     }
-
-    // NEED a function to update visual search history and add that here
+    //re-populates drop-down with the 10 most recent searches
     populateDropDown();
 }
 
@@ -78,11 +77,13 @@ let validateInputs = function(viewLocation, viewDate, viewTime) {
 
 // Populates search criteria with search history parameters
 let bringHistoryBack = function() {
-    let userInfoObject = $("#search-history").val();
-    console.log(userInfoObject);
-    let userLocation;
-    let userViewDate;
-    let userViewTime;
+    let userIndex = $("#search-history").val();
+    console.log(userIndex);
+    if (userIndex !== "none") {
+        $("#city-name").val(searchHistory[userIndex].location);
+        $("#view-date").val(searchHistory[userIndex].date);
+        $("#view-time").val(searchHistory[userIndex].time);
+    }
 }
 
 // Submit Button function:
@@ -97,7 +98,7 @@ let submitForm = function () {
     }
 }
 
-
+// initial dropdown population from localStorage
 populateDropDown();
 
 // Click event listener for the Submit Button
