@@ -40,12 +40,13 @@
                 </h5>
                 <!-- Left panel  -->
                 <div class="col s12 m4 l4 input-form">
-                    <div class="row light-blue darken-4">
+                    <!-- In case we update this to accept location input!!
+                        <div class="row light-blue darken-4">
                         <span class="white-text location-title">Where will you be?</span>
                         <div class="input-field">
                             <input placeholder="City" id="city-name" type="text" class="validate white-text">
                         </div>
-                    </div>
+                    </div>-->
 
                     <div class="row light-blue darken-4">
                         <span class="white-text date-title">On what day will you be there?</span>
@@ -79,15 +80,13 @@
                     </div>
                 </div>
 
-                <!-- Right panel  -->
+                <!-- Search Display  -->
                 <div class="col s12 m8 l8">
-                    <div>Div for Search Result Display
+                    <div class="search-display">
                         <img class="materialboxed" width="650" src="./assets/images/PIA08942_orig.jpg">
                     </div>
-                    <div class="row">
-                        (Div for search history)
-                    </div>
                 </div>
+            
             </div>
         </div>
     </main>
@@ -107,6 +106,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"
         integrity="sha512-WNLxfP/8cVYL9sj8Jnp6et0BkubLP31jhTG9vhL/F5uEZmg5wEzKoXp1kJslzPQWwPT1eyMiSxlKCgzHLOTOTQ=="
         crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="./assets/js/script.js"></script>
 </body>
