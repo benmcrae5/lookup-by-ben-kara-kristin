@@ -1,11 +1,82 @@
 // script for UofA Bootcamp Project 1 index.html
 
-// api.nasa.gov Key: bAkwC8fyPvowqus1b73c6wRxPBMW2e6F15AiO19h
+// api.nasa.gov key: bAkwC8fyPvowqus1b73c6wRxPBMW2e6F15AiO19h
+// ZipCodeAPI key: b0X4iXItTVdZoS1CfXvXbWfU22ypPqx4RtQIeEdcaY2ZAsGaG8TpZt9VU7Ju2cyj
+// AstronomyAPI Id : 56da1f12-1fb0-4e18-bb33-667658fb19cb
+// AstronomyAPI secret : a1f73a59acef108b3022eb96205e5b919065c34bdb8b3b11dcf09861b8964a90d8381b3ba21d1879130522e4ac2c4ada82f5416c3176a72a333f8cef3fc2a23acfd90807868117a75877eea3bbce1e8707a3efc21cd6f25ac48421ea710a57260aa3f36138a0ad71c7600883eb9db186
 
 let searchHistory = JSON.parse(localStorage.getItem("lookUpSearchHistory")) || [];
 
+var keyImage = "bAkwC8fyPvowqus1b73c6wRxPBMW2e6F15AiO19h";
+var keyZip = "b0X4iXItTVdZoS1CfXvXbWfU22ypPqx4RtQIeEdcaY2ZAsGaG8TpZt9VU7Ju2cyj";
+var idAstronomy = "56da1f12-1fb0-4e18-bb33-667658fb19cb";
+var secretAstronomy = "a1f73a59acef108b3022eb96205e5b919065c34bdb8b3b11dcf09861b8964a90d8381b3ba21d1879130522e4ac2c4ada82f5416c3176a72a333f8cef3fc2a23acfd90807868117a75877eea3bbce1e8707a3efc21cd6f25ac48421ea710a57260aa3f36138a0ad71c7600883eb9db186";
 
-var key = "bAkwC8fyPvowqus1b73c6wRxPBMW2e6F15AiO19h";
+const astronomyHash = btoa(`${idAstronomy}:${secretAstronomy}`);
+
+var latitude;
+var longitude;
+
+// Get longitude & latitude from Geolocation (browser). TO DO: Best Practice is to request access on a user gesture (See Issues)
+
+// Step 1. Check if browser supports Geolocation
+if("geolocation" in navigator) {
+    navigator.geolocation.getCurrentPosition(setPosition, showError);
+    }
+    else{
+        notificationElement.style.display = "block";
+        notificationElement.innerHTML = "<p>Geolocation is not supported for this browser.</p>";
+    }
+
+// Step 2. Set user's position
+function setPosition(position) {
+    latitude = position.coords.latitude;
+    longitude = position.coords.longitude;   
+}
+
+// Step 3. Show error if issue with Geolocation
+function showError(error){
+    notificationElement.style.display = "block";
+    notificationElement.innerHTML = `<p> ${error.message} </p>`;
+}
+
+// TO DO: Get longitude & latitude from user input (city name) Use ZipCodeAPI or similar for conversion
+
+// Use brower geolocation result to find planets/sun/moon on AstronomyAPI
+
+function getAstronomyData(latitude, longitude, date, time, elevation) {
+    var url = `https://api.astronomyapi.com/api/v2/bodies/positions/?latitude=${latitude}&longitude=${longitude}&from_date=${date}&to_date=${date}&time=${time}&elevation=${elevation}`;
+
+    fetch(url, {
+        headers: {"Authorization": "Basic " + astronomyHash}
+    })
+    .then(function(response) {
+        return response.json();
+    }).then(function(data) {
+        var visibleList = [];
+        var rows = data.data.table.rows;
+
+        for (var i = 0; i < rows.length; i++) {
+            if (rows[i].cells[0].position.horizonal.altitude.degrees > 0)
+                visibleList.push(rows[i].entry.name);
+        }
+
+        $("#visbleList").html(visibleList.join(", "));
+        console.log(visibleList);
+    });
+}
+
+
+// TO DO: Use ZipCodeAPI result to find planets/sun/moon on AstronomyAPI
+
+// Display results
+
+// Use Astonomy API result to display corresponding image from NASA images
+
+
+
+
+
 
 // material box for the search result image
 $(document).ready(function () {
@@ -94,7 +165,8 @@ let submitForm = function () {
     validateInputs(userLocation, userViewDate, userViewTime);
     if (userLocation && userViewDate && userViewTime) {
         searchHistoryUpdate(userLocation, userViewDate, userViewTime);
-        // function for API calls 
+        // function for API calls
+        getAstronomyData(latitude, longitude, userViewDate, userViewTime, 0);
     }
 }
 
