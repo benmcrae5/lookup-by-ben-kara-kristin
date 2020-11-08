@@ -56,3 +56,19 @@ div {
 select {
   display: flex;
 }
+
+.search-display {
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+}
+
+.search-display div {
+  max-width: 33%;
+  margin: auto;
+}
+
+.search-img {
+  min-height: 100%;
+  max-width: 100%;
+}
