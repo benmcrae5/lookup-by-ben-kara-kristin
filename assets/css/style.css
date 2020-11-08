@@ -4,6 +4,10 @@ body {
   flex-direction: column;
 }
 
+h6 {
+  margin-bottom: 35px;
+}
+
 main {
   flex: 1 0 auto;
 }

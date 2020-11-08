@@ -20,53 +20,53 @@ var longitude;
 // Get longitude & latitude from Geolocation (browser). TO DO: Best Practice is to request access on a user gesture (See Issues)
 
 // Step 1. Check if browser supports Geolocation
-if("geolocation" in navigator) {
-    navigator.geolocation.getCurrentPosition(setPosition, showError);
-    }
-    else{
-        notificationElement.style.display = "block";
-        notificationElement.innerHTML = "<p>Geolocation is not supported for this browser.</p>";
-    }
+if ("geolocation" in navigator) {
+  navigator.geolocation.getCurrentPosition(setPosition, showError);
+}
+else {
+  notificationElement.style.display = "block";
+  notificationElement.innerHTML = "<p>Geolocation is not supported for this browser.</p>";
+}
 
 // Step 2. Set user's position
 function setPosition(position) {
-    latitude = position.coords.latitude;
-    longitude = position.coords.longitude;   
+  latitude = position.coords.latitude;
+  longitude = position.coords.longitude;
 }
 
 // Step 3. Show error if issue with Geolocation
-function showError(error){
-    notificationElement.style.display = "block";
-    notificationElement.innerHTML = `<p> ${error.message} </p>`;
+function showError(error) {
+  notificationElement.style.display = "block";
+  notificationElement.innerHTML = `<p> ${error.message} </p>`;
 }
 
 // TO DO: Get longitude & latitude from user input (city name) Use ZipCodeAPI or similar for conversion
 
 // Use brower geolocation result to find planets/sun/moon on AstronomyAPI
 function getAstronomyData(latitude, longitude, date, time, elevation) {
-    var url = `https://api.astronomyapi.com/api/v2/bodies/positions/?latitude=${latitude}&longitude=${longitude}&from_date=${date}&to_date=${date}&time=${time}&elevation=${elevation}`;
+  var url = `https://api.astronomyapi.com/api/v2/bodies/positions/?latitude=${latitude}&longitude=${longitude}&from_date=${date}&to_date=${date}&time=${time}&elevation=${elevation}`;
 
-    fetch(url, {
-        headers: {"Authorization": "Basic " + astronomyHash}
-    })
-    .then(function(response) {
-        return response.json();
-    }).then(function(data) {
-        var visibleList = [];
-        var rows = data.data.table.rows;
+  fetch(url, {
+    headers: { "Authorization": "Basic " + astronomyHash }
+  })
+    .then(function (response) {
+      return response.json();
+    }).then(function (data) {
+      var visibleList = [];
+      var rows = data.data.table.rows;
 
-        for (var i = 0; i < rows.length; i++) {
-            if (rows[i].cells[0].position.horizonal.altitude.degrees > 0) {
-                visibleList.push(rows[i].entry.name);
-                getImagesFromNasa(rows[i].entry.name)
-            }
-        }        
+      for (var i = 0; i < rows.length; i++) {
+        if (rows[i].cells[0].position.horizonal.altitude.degrees > 0) {
+          visibleList.push(rows[i].entry.name);
+          getImagesFromNasa(rows[i].entry.name)
+        }
+      }
     });
 }
 
 // TO DO: Use ZipCodeAPI result to find planets/sun/moon on AstronomyAPI
 
-// material box for the search result image
+// material box for the search result images
 $(document).ready(function () {
   $('.materialboxed').materialbox();
 });
@@ -82,102 +82,103 @@ $(document).ready(function () {
 });
 
 // function to add searches to search dropdown
-let populateDropDown = function() {
-    if (searchHistory[0]) {
-        for (let i = (searchHistory.length - 1); i >= 0 && i > (searchHistory.length - 10); i--) {
-            $("<option>")
-                .addClass("search-value searchHistory[" + i + "]")
-                .attr("value", i)
-                .text(searchHistory[i].date  + "\n" + searchHistory[i].time)
-                .appendTo($("#search-history"));
-        }
+let populateDropDown = function () {
+  if (searchHistory[0]) {
+    for (let i = (searchHistory.length - 1); i >= 0 && i > (searchHistory.length - 10); i--) {
+      $("<option>")
+        .addClass("search-value searchHistory[" + i + "]")
+        .attr("value", i)
+        .text(searchHistory[i].date + "\n" + searchHistory[i].time)
+        .appendTo($("#search-history"));
     }
+  }
 }
 
 // takes in location,date,time and updates the Search history on the page and in Local Storage
 let searchHistoryUpdate = function (viewDate, viewTime) {
-    let repeatIndex = 0;
-    if (searchHistory[0]) {
-        for (let i = 0; i < searchHistory.length; i++) {
-            if (viewDate === searchHistory[i].date && viewTime === searchHistory[i].time) {
-                repeatIndex++;
-                break;
-            }
-        }
+  let repeatIndex = 0;
+  if (searchHistory[0]) {
+    for (let i = 0; i < searchHistory.length; i++) {
+      if (viewDate === searchHistory[i].date && viewTime === searchHistory[i].time) {
+        repeatIndex++;
+        break;
+      }
     }
-    if (repeatIndex === 0) {
-        let saveObject = {"date": viewDate, "time": viewTime, };
-        searchHistory.push(saveObject);
-        localStorage.setItem("lookUpSearchHistory", JSON.stringify(searchHistory));
-    }
-    //re-populates drop-down with the 10 most recent searches
-    populateDropDown();
+  }
+  if (repeatIndex === 0) {
+    let saveObject = { "date": viewDate, "time": viewTime, };
+    searchHistory.push(saveObject);
+    localStorage.setItem("lookUpSearchHistory", JSON.stringify(searchHistory));
+  }
+  //re-populates drop-down with the 10 most recent searches
+  populateDropDown();
 }
 
 //validates input, displays missing parameters in red, changes correct ones back
-let validateInputs = function(viewDate, viewTime) {
-    if (!viewDate) {
-        $(".date-title").removeClass("white-text").addClass("red-text");
-    } else {
-        $(".date-title").removeClass("red-text").addClass("white-text");
-    }
-    if (!viewTime) {
-        $(".time-title").removeClass("white-text").addClass("red-text");
-    } else {
-        $(".time-title").removeClass("red-text").addClass("white-text");
-    }
+let validateInputs = function (viewDate, viewTime) {
+  if (!viewDate) {
+    $(".date-title").removeClass("white-text").addClass("red-text");
+  } else {
+    $(".date-title").removeClass("red-text").addClass("white-text");
+  }
+  if (!viewTime) {
+    $(".time-title").removeClass("white-text").addClass("red-text");
+  } else {
+    $(".time-title").removeClass("red-text").addClass("white-text");
+  }
 }
 
 // Populates search criteria with search history parameters
-let bringHistoryBack = function() {
-    let userIndex = $("#search-history").val();
-    console.log(userIndex);
-    if (userIndex !== "none") {
-        $("#view-date").val(searchHistory[userIndex].date);
-        $("#view-time").val(searchHistory[userIndex].time);
-    }
+let bringHistoryBack = function () {
+  let userIndex = $("#search-history").val();
+  console.log(userIndex);
+  if (userIndex !== "none") {
+    $("#view-date").val(searchHistory[userIndex].date);
+    $("#view-time").val(searchHistory[userIndex].time);
+  }
 }
 
 // Submit Button function:
 let submitForm = function () {
-    $(".search-display").empty();
-    let userViewDate = moment($("#view-date").val(), "ll").format("YYYY-MM-DD");
-    let userViewTime = moment($("#view-time").val(), "HH:mm A").format("kk:mm:ss");
-    validateInputs(userViewDate, userViewTime);
-    if (userViewDate && userViewTime) {
-        searchHistoryUpdate(userViewDate, userViewTime);
-        // function for API calls
-        getAstronomyData(latitude, longitude, userViewDate, userViewTime, 0);
-    }
+  $(".search-display").empty();
+  let userViewDate = moment($("#view-date").val(), "ll").format("YYYY-MM-DD");
+  let userViewTime = moment($("#view-time").val(), "HH:mm A").format("kk:mm:ss");
+  validateInputs(userViewDate, userViewTime);
+  if (userViewDate && userViewTime) {
+    searchHistoryUpdate(userViewDate, userViewTime);
+    // function for API calls
+    getAstronomyData(latitude, longitude, userViewDate, userViewTime, 0);
+  }
 }
 
-let displayInformation = function(planet, imgUrl) {
-    let thisImage = $("<div>").addClass("result-" + planet + " search-result");
-    $("<p>")
-        .addClass("search-name")
-        .text(planet)
-        .appendTo(thisImage)
-    $("<img>")
-        .addClass("img-" + planet + " search-img")
-        .attr("src", imgUrl)
-        .appendTo(thisImage)
-    thisImage.appendTo(".search-display");
+let displayInformation = function (planet, imgUrl) {
+  let thisImage = $("<div>").addClass("result-" + planet + " search-result");
+  $("<p>")
+    .addClass("search-name")
+    .text(planet)
+    .appendTo(thisImage)
+  $("<img>")
+    .addClass("img-" + planet + " search-img")
+    .addClass("materialboxed")
+    .attr("src", imgUrl)
+    .appendTo(thisImage)
+  thisImage.appendTo(".search-display");
 }
 
 // Use Astonomy API result to display corresponding random image from NASA images
 function getImagesFromNasa(planetName) {
-    let nasaApiUrl = "https://images-api.nasa.gov/search?q=" + planetName;
-    fetch(nasaApiUrl)
-        .then(function (response) {
-            if (response.ok) {
-                return response.json()
-            }
-        })
-        .then( function(obj) {
-            //uses random number to find photo
-            let randomIndex = Math.floor(Math.random() * 50);
-            displayInformation(planetName, obj.collection.items[randomIndex].links[0].href);
-        })
+  let nasaApiUrl = "https://images-api.nasa.gov/search?q=" + planetName;
+  fetch(nasaApiUrl)
+    .then(function (response) {
+      if (response.ok) {
+        return response.json()
+      }
+    })
+    .then(function (obj) {
+      //uses random number to find photo
+      let randomIndex = Math.floor(Math.random() * 50);
+      displayInformation(planetName, obj.collection.items[randomIndex].links[0].href);
+    })
 }
 
 // initial dropdown population from localStorage

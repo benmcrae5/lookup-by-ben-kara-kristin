@@ -35,9 +35,12 @@
     <main>
         <div class="container">
             <div class="row">
-                <h5>
-                    We should probably have some kind of text for instructions.
-                </h5>
+                <h6 class="center-align">
+                    Our universe's planets are always moving. Interested in knowing which bodies are (or will be) above
+                    you at any given time? Allow the browser to gauge your location, then enter a date and time below to
+                    find out! Results will show you the planets (including the sun and moon) that will be overhead at
+                    your current location and will pull images of each from the NASA Image and Video library.
+                </h6>
                 <!-- Left panel  -->
                 <div class="col s12 m4 l4 input-form">
                     <!-- In case we update this to accept location input!!
@@ -49,7 +52,7 @@
                     </div>-->
 
                     <div class="row light-blue darken-4">
-                        <span class="white-text date-title">On what day will you be there?</span>
+                        <span class="white-text date-title">What day do you want to search?</span>
                         <div class="input-field">
                             <input placeholder="Date" id="view-date" type="text" class="datepicker white-text">
                         </div>
@@ -72,7 +75,7 @@
                     <!--Search History-->
                     <div class="history">
                         <form action="">
-                            <label for="search-history">Select a previous search</label>
+                            <label for="search-history">Select a previous search and click submit</label>
                             <select name="search-history" id="search-history">
                                 <option value="none"></option>
                             </select>
@@ -83,10 +86,10 @@
                 <!-- Search Display  -->
                 <div class="col s12 m8 l8">
                     <div class="search-display">
-                        <img class="materialboxed" width="650" src="./assets/images/PIA08942_orig.jpg">
+                        <!--      <img class="materialboxed" width="650" src="./assets/images/PIA08942_orig.jpg">  -->
                     </div>
                 </div>
-            
+
             </div>
         </div>
     </main>
@@ -106,7 +109,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"
         integrity="sha512-WNLxfP/8cVYL9sj8Jnp6et0BkubLP31jhTG9vhL/F5uEZmg5wEzKoXp1kJslzPQWwPT1eyMiSxlKCgzHLOTOTQ=="
         crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
+        integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
+        crossorigin="anonymous"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="./assets/js/script.js"></script>
