@@ -4,6 +4,10 @@ body {
   flex-direction: column;
 }
 
+h6 {
+  margin-bottom: 35px;
+}
+
 main {
   flex: 1 0 auto;
 }
@@ -16,6 +20,13 @@ div {
   padding: 10px;
 }
 
+h5 {
+  margin: 0;
+}
+
+.parallax-container {
+  height: 400px;
+}
 
 /* materialize datepicker styling */
 .datepicker-date-display {
