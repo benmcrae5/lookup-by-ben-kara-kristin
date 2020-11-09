@@ -24,6 +24,10 @@ h5 {
   margin: 0;
 }
 
+.parallax-container {
+  height: 400px;
+}
+
 /* materialize datepicker styling */
 .datepicker-date-display {
   background-color: rgb(118, 186, 241);
