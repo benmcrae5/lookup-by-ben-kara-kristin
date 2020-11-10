@@ -74,7 +74,7 @@ select {
   text-align: center;
 }
 
-.search-display div {
+.search-display > div {
   max-width: 33%;
   margin: auto;
 }
