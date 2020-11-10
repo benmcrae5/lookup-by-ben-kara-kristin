@@ -64,9 +64,9 @@ h5 {
     fill: #056ea3;
 }
 
-select {
+/* #search-history {
   display: flex;
-}
+} */
 
 .search-display {
   display: flex;
