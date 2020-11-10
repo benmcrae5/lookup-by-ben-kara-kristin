@@ -67,22 +67,10 @@ function getAstronomyData(latitude, longitude, date, time, elevation) {
 // TO DO: Use ZipCodeAPI result to find planets/sun/moon on AstronomyAPI
 $(document).ready(function () {
   $('.parallax').parallax();
-});
-
-
-// material box for the search result images
-$(document).ready(function () {
   $('.materialboxed').materialbox();
-});
-
-// materialize datepicker
-$(document).ready(function () {
   $('.datepicker').datepicker();
-});
-
-// materialize timepicker
-$(document).ready(function () {
   $('.timepicker').timepicker();
+  $('#search-history').formSelect();
 });
 
 // function to add searches to search dropdown
