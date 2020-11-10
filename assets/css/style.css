@@ -64,10 +64,6 @@ h5 {
     fill: #056ea3;
 }
 
-/* #search-history {
-  display: flex;
-} */
-
 .search-display {
   display: flex;
   flex-wrap: wrap;
