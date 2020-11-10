@@ -166,6 +166,7 @@ let displayInformation = function (planet, imgUrl) {
     .addClass("materialboxed")
     .attr("src", imgUrl)
     .appendTo(thisImage)
+    .materialbox()
   thisImage.appendTo(".search-display");
 }
 
