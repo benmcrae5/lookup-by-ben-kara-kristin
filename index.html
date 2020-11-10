@@ -14,22 +14,10 @@
 </head>
 
 <body>
+    <!-- Nav Bar  -->
     <nav class="deep-purple lighten-2  z-depth-2">
         <div class="nav-wrapper">
             <a href="#" class="brand-logo">LookUp</a>
-            <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li><a href="https://images.nasa.gov/" target="_blank">NASA Image and Video Library</a></li>
-                <li><a href="https://images.nasa.gov/search-results?q=sun&page=1&media=image,video,audio&yearStart=1920&yearEnd=2020"
-                        target="_blank">Sun</a>
-                </li>
-                <li><a href="https://images.nasa.gov/search-results?q=moon&page=1&media=image,video,audio&yearStart=1920&yearEnd=2020"
-                        target="_blank">Moon</a>
-                </li>
-
-                <li><a href="https://images.nasa.gov/search-results?q=planets&page=1&media=image,video,audio&yearStart=1920&yearEnd=2020"
-                        target="_blank">Planets</a>
-                </li>
-            </ul>
         </div>
     </nav>
     <main>
@@ -38,24 +26,42 @@
                 <img src="./assets/images/PIA08942_orig.jpg">
             </div>
         </div>
+
+        <!-- Geolocation Error Modal Structure -->
+        <div id="modal1" class="modal">
+            <div class="modal-content">
+                <h4>Error</h4>
+                <p>Geolocation is not supported for this browser. Please try opening this app in Google Chrome.</p>
+            </div>
+            <div class="modal-footer">
+                <a href="#!" class="modal-close waves-effect waves-green btn-flat">Ok</a>
+            </div>
+        </div>
+
+        <!-- Page Content -->
         <div class="container">
             <div class="row">
                 <h6 class="center-align">
                     Interested in knowing which bodies are (or will be) above you at any given time? Allow the browser
                     to gauge your location, then enter a date and time below to find out! Results will show you the
                     planets (including the sun and moon) that will be overhead at your current location and will pull
-                    images of each from the NASA Image and Video library.
+                    images of each from the NASA Image and Video Library.
                 </h6>
                 <!-- Left panel  -->
                 <div class="col s12 m4 l4 input-form">
-                    <!-- In case we update this to accept location input!!
-                        <div class="row light-blue darken-4">
-                        <span class="white-text location-title">Where will you be?</span>
-                        <div class="input-field">
-                            <input placeholder="City" id="city-name" type="text" class="validate white-text">
-                        </div>
-                    </div>-->
 
+                    <!-- Geolocation Request  -->
+                    <div class="row light-blue darken-4 z-depth-2">
+                        <span class="white-text date-title">Can the browser access your geolocation? We need your
+                            location to process our data.</span>
+                        <div class="input-field">
+                            <button id="geolocation" class="btn waves-effect waves-light" type="submit"
+                                name="action">Yes, please do
+                                <i class="material-icons right">location_on</i>
+                            </button> </div>
+                    </div>
+
+                    <!-- Date Input  -->
                     <div class="row light-blue darken-4 z-depth-2">
                         <span class="white-text date-title">What day do you want to search?</span>
                         <div class="input-field">
@@ -63,6 +69,7 @@
                         </div>
                     </div>
 
+                    <!-- Time Input  -->
                     <div class="row light-blue darken-4 z-depth-2">
                         <span class="white-text time-title">At what time?</span>
                         <div class="input-field">
@@ -78,13 +85,11 @@
                     </div>
 
                     <!--Search History-->
-                    <div class="history">
-                        <form action="">
-                            <label for="search-history">Select a previous search and click submit</label>
-                            <select name="search-history" id="search-history">
-                                <option value="none"></option>
-                            </select>
-                        </form>
+                    <div class="history input-field">
+                        <select name="search-history" id="search-history">
+                            <option value="" disabled selected>Previous searches</option>
+                        </select>
+                        <label for="search-history">Select a previous search and click submit</label>
                     </div>
                 </div>
 
@@ -105,14 +110,38 @@
         </div>
     </main>
     <footer class="page-footer deep-purple lighten-2  z-depth-2">
-        <div class="row">
-            <h5 class="white-text">Chuck Norris Quote?</h5>
-            <p class="grey-text text-lighten-4">"A lot of times people look at the negative side of what they
-                feel they can't do. I always look on the positive side of
-                what I can do." -Chuck Norris
-            </p>
-            <p> © 2020 BenKaraKristin, Inc.
-            </p>
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="white-text">Images Courtesy of</h5>
+                    <p>
+                        <a class="grey-text text-lighten-3" href="https://images.nasa.gov/" target="_blank">NASA
+                            Image and Video Library</a>
+                    </p>
+                </div>
+                <div class="col l4 offset-l2 s12">
+                    <h5 class="white-text">More NASA Images</h5>
+                    <ul>
+                        <li><a class="grey-text text-lighten-3"
+                                href="https://images.nasa.gov/search-results?q=sun&page=1&media=image,video,audio&yearStart=1920&yearEnd=2020"
+                                target="_blank">Sun</a>
+                        </li>
+                        <li><a class="grey-text text-lighten-3"
+                                href="https://images.nasa.gov/search-results?q=moon&page=1&media=image,video,audio&yearStart=1920&yearEnd=2020"
+                                target="_blank">Moon</a>
+                        </li>
+                        <li><a class="grey-text text-lighten-3"
+                                href="https://images.nasa.gov/search-results?q=planets&page=1&media=image,video,audio&yearStart=1920&yearEnd=2020"
+                                target="_blank">Planets</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                © 2020 BenKaraKristin, Inc.
+            </div>
         </div>
     </footer>
 

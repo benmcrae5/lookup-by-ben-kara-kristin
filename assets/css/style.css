@@ -11,10 +11,6 @@ h6 {
 main {
   flex: 1 0 auto;
 }
-
-footer {
-  padding: 8px;
-}
   
 div {
   padding: 10px;
@@ -25,7 +21,11 @@ h5 {
 }
 
 .parallax-container {
-  height: 400px;
+  height: 300px;
+}
+
+.history {
+  margin-top: 100px;
 }
 
 /* materialize datepicker styling */
@@ -63,10 +63,6 @@ h5 {
 .timepicker-canvas-bearing {
     fill: #056ea3;
 }
-
-/* #search-history {
-  display: flex;
-} */
 
 .search-display {
   display: flex;
