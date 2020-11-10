@@ -28,6 +28,10 @@ h5 {
   height: 400px;
 }
 
+.history {
+  margin-top: 100px;
+}
+
 /* materialize datepicker styling */
 .datepicker-date-display {
   background-color: rgb(118, 186, 241);
