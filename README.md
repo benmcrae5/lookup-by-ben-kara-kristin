@@ -1,4 +1,6 @@
-# uofa-bootcamp-project-1
+# lookup-by-ben-kara-kristin
+### formerly: uofa-bootcamp-project-1
+### URL: https://benmcrae5.github.io/lookup-by-ben-kara-kristin/
 
 ## Initial Outline of project:
 Astronomy API:
