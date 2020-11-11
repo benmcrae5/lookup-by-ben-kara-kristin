@@ -70,16 +70,17 @@ function getAstronomyData(latitude, longitude, date, time, elevation) {
 }
 
 // TO DO: Use ZipCodeAPI result to find planets/sun/moon on AstronomyAPI
+
 $(document).ready(function () {
   $('.parallax').parallax();
   $('.materialboxed').materialbox();
   $('.datepicker').datepicker();
   $('.timepicker').timepicker();
-  $('#search-history').formSelect();
 });
 
 // function to add searches to search dropdown
 let populateDropDown = function () {
+  $('#search-history').empty();
   if (searchHistory[0]) {
     for (let i = (searchHistory.length - 1); i >= 0 && i > (searchHistory.length - 10); i--) {
       $("<option>")
@@ -89,6 +90,7 @@ let populateDropDown = function () {
         .appendTo($("#search-history"));
     }
   }
+  $('#search-history').formSelect();
 }
 
 // takes in location,date,time and updates the Search history on the page and in Local Storage
@@ -103,7 +105,10 @@ let searchHistoryUpdate = function (viewDate, viewTime) {
     }
   }
   if (repeatIndex === 0) {
-    let saveObject = { "date": viewDate, "time": viewTime, };
+    let saveObject = { 
+      "date": moment(viewDate, "YYYY-MM-DD").format("ll"), 
+      "time": moment(viewTime, "kk:mm:ss").format("HH:mm A"), 
+    };
     searchHistory.push(saveObject);
     localStorage.setItem("lookUpSearchHistory", JSON.stringify(searchHistory));
   }
@@ -158,6 +163,7 @@ let displayInformation = function (planet, imgUrl) {
     .addClass("img-" + planet + " search-img")
     .addClass("materialboxed")
     .attr("src", imgUrl)
+    .attr("alt", "Picture-of-" + planet)
     .appendTo(thisImage)
     .materialbox()
   thisImage.appendTo(".search-display");
