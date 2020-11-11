@@ -19,27 +19,32 @@ var longitude;
 
 // Get longitude & latitude from Geolocation (browser). TO DO: Best Practice is to request access on a user gesture (See Issues)
 
-// Step 1. Check if browser supports Geolocation
-if ("geolocation" in navigator) {
-  navigator.geolocation.getCurrentPosition(setPosition, showError);
-}
-else {
-  notificationElement.style.display = "block";
-  notificationElement.innerHTML = "<p>Geolocation is not supported for this browser.</p>";
-}
+//function to access web geolocation
+let accessGeolocation= function() {
 
-// Step 2. Set user's position
-function setPosition(position) {
-  latitude = position.coords.latitude;
-  longitude = position.coords.longitude;
-}
+  // Step 1. Check if browser supports Geolocation
+  if ("geolocation" in navigator) {
+    navigator.geolocation.getCurrentPosition(setPosition, showError);
+  }
+  else {
+    notificationElement.style.display = "block";
+    notificationElement.innerHTML = "<p>Geolocation is not supported for this browser.</p>";
+  }
 
-// Step 3. Show error if issue with Geolocation
-function showError(error) {
-  notificationElement.style.display = "block";
-  notificationElement.innerHTML = `<p> ${error.message} </p>`;
-}
+  // Step 2. Set user's position
+  function setPosition(position) {
+    latitude = position.coords.latitude;
+    longitude = position.coords.longitude;
+    $("#geolocation i").text("check");
+  }
 
+  // Step 3. Show error if issue with Geolocation
+  function showError(error) {
+    notificationElement.style.display = "block";
+    notificationElement.innerHTML = `<p> ${error.message} </p>`;
+  }
+
+}
 // TO DO: Get longitude & latitude from user input (city name) Use ZipCodeAPI or similar for conversion
 
 // Use brower geolocation result to find planets/sun/moon on AstronomyAPI
@@ -182,3 +187,6 @@ $("#submit-btn").on("click", submitForm);
 
 // Change event listener for activating the search history
 $(".history").change(bringHistoryBack);
+
+// Use Geolocation button to access web geolocation
+$("#geolocation").on("click", accessGeolocation);
