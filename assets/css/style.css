@@ -4,6 +4,10 @@ body {
   flex-direction: column;
 }
 
+header {
+  text-align: center;
+}
+
 h6 {
   margin-bottom: 35px;
 }
