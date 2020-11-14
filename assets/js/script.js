@@ -14,10 +14,24 @@ var secretAstronomy = "a1f73a59acef108b3022eb96205e5b919065c34bdb8b3b11dcf09861b
 
 const astronomyHash = btoa(`${idAstronomy}:${secretAstronomy}`);
 
+let showGeoLocate = 0;
 var latitude;
 var longitude;
 
 // Get longitude & latitude from Geolocation (browser). TO DO: Best Practice is to request access on a user gesture (See Issues)
+
+// function to show lat/lon input fields when needed.
+let showLatLonFields = function() {
+  if (showGeoLocate === 0) {
+    $(".no-geo-inputs").removeClass("hidden");
+    $("#no-geolocation").addClass("hidden");
+    showGeoLocate = 1;
+  } else if (showGeoLocate === 1) {
+    $(".no-geo-inputs").addClass("hidden");
+    $("#no-geolocation").removeClass("hidden");
+    showGeoLocate = 0;
+  }
+}
 
 //function to access web geolocation
 let accessGeolocation= function() {
@@ -27,8 +41,11 @@ let accessGeolocation= function() {
     navigator.geolocation.getCurrentPosition(setPosition, showError);
   }
   else {
-    notificationElement.style.display = "block";
-    notificationElement.innerHTML = "<p>Geolocation is not supported for this browser.</p>";
+    // NOT WORKING!! Initialize Modal message about modal
+    $(".modal").modal();
+    $("#modal-content").innerHTML = "<p>Geolocation is not supported for this browser.</p>";
+    showGeoLocate = 0;
+    showLatLonFields();
   }
 
   // Step 2. Set user's position
@@ -36,14 +53,18 @@ let accessGeolocation= function() {
     latitude = position.coords.latitude;
     longitude = position.coords.longitude;
     $("#geolocation i").text("check");
+    $(".no-geolocation").addClass("hidden");
+    $(".no-geo-inputs").addClass("hidden");
   }
 
-  // Step 3. Show error if issue with Geolocation
+  // Step 3. Show error if issue with Geolocation (and block)
   function showError(error) {
-    notificationElement.style.display = "block";
-    notificationElement.innerHTML = `<p> ${error.message} </p>`;
+    //NOT WORKING!! Initialize Modal message about modal
+    $(".modal").modal();
+    $("#modal-content").innerHTML = `<p> ${error.message} </p>`;
+    showGeoLocate = 0;
+    showLatLonFields();
   }
-
 }
 // TO DO: Get longitude & latitude from user input (city name) Use ZipCodeAPI or similar for conversion
 
@@ -66,6 +87,21 @@ function getAstronomyData(latitude, longitude, date, time, elevation) {
           getImagesFromNasa(rows[i].entry.name)
         }
       }
+      if (!visibleList[0]) {
+        let thisImage = $("<div>").addClass("result-none search-result");
+        $("<p>")
+          .addClass("search-name no-result")
+          .text("There doesn't seem to be anything overhead on the time in question...")
+          .appendTo(thisImage)
+        $("<img>")
+          .addClass("img-none search-img")
+          .addClass("materialboxed")
+          .attr("src", "https://static9.depositphotos.com/1011382/1144/i/600/depositphotos_11444953-stock-photo-shoulder-shrug.jpg")
+          .attr("alt", "Missing Picture!")
+          .appendTo(thisImage)
+          .materialbox()
+        thisImage.appendTo(".search-display");
+      }
     });
 }
 
@@ -86,7 +122,7 @@ let populateDropDown = function () {
       $("<option>")
         .addClass("search-value searchHistory[" + i + "]")
         .attr("value", i)
-        .text(searchHistory[i].date + "\n" + searchHistory[i].time)
+        .text(searchHistory[i].date + " - " + searchHistory[i].time)
         .appendTo($("#search-history"));
     }
   }
@@ -116,17 +152,21 @@ let searchHistoryUpdate = function (viewDate, viewTime) {
   populateDropDown();
 }
 
-//validates input, displays missing parameters in red, changes correct ones back
-let validateInputs = function (viewDate, viewTime) {
-  if (!viewDate) {
-    $(".date-title").removeClass("white-text").addClass("red-text");
+// method for ValidateInputs
+let toggleErrorColor = function(item, classCall) {
+  if (!item) {
+    $(classCall).removeClass("white-text").addClass("red-text");
   } else {
-    $(".date-title").removeClass("red-text").addClass("white-text");
+    $(classCall).removeClass("red-text").addClass("white-text");
   }
-  if (!viewTime) {
-    $(".time-title").removeClass("white-text").addClass("red-text");
-  } else {
-    $(".time-title").removeClass("red-text").addClass("white-text");
+}
+
+//validates input, displays missing parameters in red, changes correct ones back
+let validateInputs = function (viewDate, viewTime, coordinates) {
+  toggleErrorColor(viewDate, ".date-title");
+  toggleErrorColor(viewTime, ".time-title");
+  if (showGeoLocate === 1) {
+    toggleErrorColor(coordinates, ".no-geo-location");
   }
 }
 
@@ -143,12 +183,34 @@ let bringHistoryBack = function () {
 // Submit Button function:
 let submitForm = function () {
   $(".search-display").empty();
-  let userViewDate = moment($("#view-date").val(), "ll").format("YYYY-MM-DD");
-  let userViewTime = moment($("#view-time").val(), "HH:mm A").format("kk:mm:ss");
-  validateInputs(userViewDate, userViewTime);
-  if (userViewDate && userViewTime) {
+  let coordinates = {};
+  if (showGeoLocate === 1) {
+    coordinates = {
+      "lat": parseFloat( $("#lat-input").val() ), 
+      "lon": parseFloat( $("#lon-input").val() ),
+    }; 
+  } else {
+    coordinates = {
+      "lat": latitude, 
+      "lon": longitude,
+    };    
+  }
+  //console.log("Lat: " + typeof coordinates.lat + " - Lon: " + typeof coordinates.lon);
+  //console.log("Lat: " + coordinates.lat + " - Lon: " + coordinates.lon);
+  let userViewDate;
+  let userViewTime;
+  if($("#view-date").val()) {
+    console.log($("#view-date").val());
+    userViewDate = moment($("#view-date").val(), "ll").format("YYYY-MM-DD");
+  }
+  if($("#view-time").val()) {
+    console.log($("#view-time").val());
+    userViewTime = moment($("#view-time").val(), "HH:mm A").format("kk:mm:ss");
+  }
+  console.log(userViewDate, userViewTime, coordinates);
+  validateInputs(userViewDate, userViewTime, coordinates);
+  if (userViewDate && userViewTime && coordinates.lat && coordinates.lon) {
     searchHistoryUpdate(userViewDate, userViewTime);
-    // function for API calls
     getAstronomyData(latitude, longitude, userViewDate, userViewTime, 0);
   }
 }
@@ -185,8 +247,13 @@ function getImagesFromNasa(planetName) {
     })
 }
 
+
+
 // initial dropdown population from localStorage
 populateDropDown();
+
+// Click event listener for "No Thanks" geolocation button
+$("#no-geolocation").on("click", showLatLonFields);
 
 // Click event listener for the Submit Button
 $("#submit-btn").on("click", submitForm);

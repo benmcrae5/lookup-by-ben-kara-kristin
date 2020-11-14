@@ -30,7 +30,7 @@
         <!-- Geolocation Error Modal Structure -->
         <div id="modal1" class="modal">
             <div class="modal-content">
-                <h4>Error</h4>
+                <h4>Error!</h4>
                 <p>Geolocation is not supported for this browser. Please try opening this app in Google Chrome.</p>
             </div>
             <div class="modal-footer">
@@ -58,7 +58,21 @@
                             <button id="geolocation" class="btn waves-effect waves-light indigo accent-2" type="submit"
                                 name="action">Yes, please do
                                 <i class="material-icons right">location_on</i>
-                            </button> </div>
+                            </button>
+                            <button id="no-geolocation" class="btn waves-effect waves-light red accent-2" type="submit"
+                                name="action">No thanks...
+                            </button>
+                            <!--Activates if user chooses no geolocation-->
+                            <div class="no-geo-inputs hidden">
+                                <p class="white-text no-geo-title">Without Geolocation, please enter your Latitude and Longitude instead: </p>
+                                <div class="input-field">
+                                    <input placeholder="Latitude" id="lat-input" type="text" class="white-text">
+                                </div>
+                                <div class="input-field">
+                                    <input placeholder="Longitude" id="lon-input" type="text" class="white-text">
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <!-- Date Input  -->
