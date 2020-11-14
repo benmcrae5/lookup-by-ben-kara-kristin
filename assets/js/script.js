@@ -21,7 +21,7 @@ var longitude;
 // Get longitude & latitude from Geolocation (browser). TO DO: Best Practice is to request access on a user gesture (See Issues)
 
 // function to show lat/lon input fields when needed.
-let showLatLonFields = function() {
+let showLatLonFields = function () {
   if (showGeoLocate === 0) {
     $(".no-geo-inputs").removeClass("hidden");
     $("#no-geolocation").addClass("hidden");
@@ -34,7 +34,7 @@ let showLatLonFields = function() {
 }
 
 //function to access web geolocation
-let accessGeolocation= function() {
+let accessGeolocation = function () {
 
   // Step 1. Check if browser supports Geolocation
   if ("geolocation" in navigator) {
@@ -141,9 +141,9 @@ let searchHistoryUpdate = function (viewDate, viewTime) {
     }
   }
   if (repeatIndex === 0) {
-    let saveObject = { 
-      "date": moment(viewDate, "YYYY-MM-DD").format("ll"), 
-      "time": moment(viewTime, "kk:mm:ss").format("HH:mm A"), 
+    let saveObject = {
+      "date": moment(viewDate, "YYYY-MM-DD").format("ll"),
+      "time": moment(viewTime, "kk:mm:ss").format("HH:mm A"),
     };
     searchHistory.push(saveObject);
     localStorage.setItem("lookUpSearchHistory", JSON.stringify(searchHistory));
@@ -153,7 +153,7 @@ let searchHistoryUpdate = function (viewDate, viewTime) {
 }
 
 // method for ValidateInputs
-let toggleErrorColor = function(item, classCall) {
+let toggleErrorColor = function (item, classCall) {
   if (!item) {
     $(classCall).removeClass("white-text").addClass("red-text");
   } else {
@@ -186,24 +186,24 @@ let submitForm = function () {
   let coordinates = {};
   if (showGeoLocate === 1) {
     coordinates = {
-      "lat": parseFloat( $("#lat-input").val() ), 
-      "lon": parseFloat( $("#lon-input").val() ),
-    }; 
+      "lat": parseFloat($("#lat-input").val()),
+      "lon": parseFloat($("#lon-input").val()),
+    };
   } else {
     coordinates = {
-      "lat": latitude, 
+      "lat": latitude,
       "lon": longitude,
-    };    
+    };
   }
   //console.log("Lat: " + typeof coordinates.lat + " - Lon: " + typeof coordinates.lon);
   //console.log("Lat: " + coordinates.lat + " - Lon: " + coordinates.lon);
   let userViewDate;
   let userViewTime;
-  if($("#view-date").val()) {
+  if ($("#view-date").val()) {
     console.log($("#view-date").val());
     userViewDate = moment($("#view-date").val(), "ll").format("YYYY-MM-DD");
   }
-  if($("#view-time").val()) {
+  if ($("#view-time").val()) {
     console.log($("#view-time").val());
     userViewTime = moment($("#view-time").val(), "HH:mm A").format("kk:mm:ss");
   }
@@ -211,7 +211,7 @@ let submitForm = function () {
   validateInputs(userViewDate, userViewTime, coordinates);
   if (userViewDate && userViewTime && coordinates.lat && coordinates.lon) {
     searchHistoryUpdate(userViewDate, userViewTime);
-    getAstronomyData(latitude, longitude, userViewDate, userViewTime, 0);
+    getAstronomyData(coordinates.lat, coordinates.lon, userViewDate, userViewTime, 0);
   }
 }
 
