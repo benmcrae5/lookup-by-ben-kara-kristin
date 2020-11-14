@@ -32,6 +32,10 @@ h5 {
   margin-top: 100px;
 }
 
+.lat-long-box {
+  display: none;
+}
+
 /* materialize datepicker styling */
 .datepicker-date-display {
   background-color: rgb(118, 186, 241);
