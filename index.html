@@ -17,7 +17,7 @@
     <!-- Nav Bar  -->
     <header class="indigo darken-4  z-depth-2">
         <div class="nav-wrapper">
-            <a href="#" class="brand-logo"><img src= "./assets/images/LookUp_Logo_2-02.png" height="100"></a>
+            <a href="#" class="brand-logo"><img src="./assets/images/LookUp_Logo_2-02.png" height="100"></a>
         </div>
     </header>
     <main>
@@ -42,7 +42,8 @@
         <div class="container">
             <div class="row">
                 <h6 class="center-align">
-                    Interested in knowing which celestial bodies are (or will be) above you at any given time? Allow the browser
+                    Interested in knowing which celestial bodies are (or will be) above you at any given time? Allow the
+                    browser
                     to gauge your location, then enter a date and time below to find out! Results will show you the
                     planets (including the sun and moon) that will be overhead at your current location and will pull
                     images of each from the NASA Image and Video Library.
@@ -59,19 +60,25 @@
                                 name="action">Yes, please do
                                 <i class="material-icons right">location_on</i>
                             </button>
+                        </div>
+                        <div class="input-field">
                             <button id="no-geolocation" class="btn waves-effect waves-light red accent-2" type="submit"
-                                name="action">No thanks...
+                                name="action">No, thank you
+                                <i class="material-icons right">location_off</i>
                             </button>
-                            <!--Activates if user chooses no geolocation-->
-                            <div class="no-geo-inputs hidden">
-                                <p class="white-text no-geo-title">Without Geolocation, please enter your Latitude and Longitude instead: </p>
-                                <div class="input-field">
-                                    <input placeholder="Latitude" id="lat-input" type="text" class="white-text">
-                                </div>
-                                <div class="input-field">
-                                    <input placeholder="Longitude" id="lon-input" type="text" class="white-text">
-                                </div>
-                            </div>
+                        </div>
+                    </div>
+
+                    <!--Activates if user chooses no geolocation-->
+                    <div class="row indigo darken-4 z-depth-2 no-geo-inputs hidden">
+                        <p class="white-text no-geo-title">Without enabling browser geolocation, please enter your
+                            Latitude and
+                            Longitude instead: </p>
+                        <div class="input-field">
+                            <input placeholder="Latitude" id="lat-input" type="text" class="white-text">
+                        </div>
+                        <div class="input-field">
+                            <input placeholder="Longitude" id="lon-input" type="text" class="white-text">
                         </div>
                     </div>
 
@@ -93,7 +100,8 @@
 
                     <!--Submit Button-->
                     <div>
-                        <button id="submit-btn" class="btn waves-effect waves-light indigo accent-2" type="submit" name="action">Submit
+                        <button id="submit-btn" class="btn waves-effect waves-light indigo accent-2" type="submit"
+                            name="action">Submit
                             <i class="material-icons right">send</i>
                         </button>
                     </div>
