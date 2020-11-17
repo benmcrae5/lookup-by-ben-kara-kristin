@@ -3,7 +3,7 @@ LookUp is an astronomy-based app that allows the user to use their browser locat
 
 ## User Story
 AS A novice astronomer<br>
-I WANT to see which bodies (aplanets, moon or sun) are overhead at any given date or time at my location<br>
+I WANT to see which bodies (planets, moon or sun) are overhead at any given date or time at my location<br>
 SO THAT I can be more knowledgeable about what’s there so I can better find them!<br>
 
 GIVEN I am using this app to see available celestial bodies overhead<br>
